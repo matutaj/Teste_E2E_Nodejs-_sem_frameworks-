@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "node  api.js",
-    "test:dev": "node --test --watch api.test.js",
-    "test": "node --test api.test.js"
+    "test:dev": "node   api.test.js",
+    "test": "node  api.test.js"
   },
   "repository": {
     "type": "git",
