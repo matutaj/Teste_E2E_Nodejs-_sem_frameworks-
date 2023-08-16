@@ -8,4 +8,7 @@ describe("API WorkFlow", () => {
         await new Promise(resolve => _server.once("listening", resolve))
     })
     after(done => _server.close(done))
+    it('Should receive not autorized given wrong user and password', async () => {
+
+    })
 })
