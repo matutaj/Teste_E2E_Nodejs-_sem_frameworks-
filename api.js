@@ -2,17 +2,21 @@ import { once } from "node:events"
 import { createServer } from "node:http"
 
 const VALID = {
-    user: "matutajorge",
+    user: "matutaJorge",
     password: "1234"
 }
 
 async function loginRoute(request, response) {
     const { user, password } = JSON.parse(await once(request, 'data'))
-    console.log({ user, password })
+    if (user !== VALID.user || password !== VALID.password) {
+        response.writeHead(401)
+        response.end(JSON.stringify({ error: 'user invalid!' }))
+        return;
+    }
     response.end("ok")
 }
 
-async function handle(request, response) {
+async function handler(request, response) {
 
     if (request.url === '/login' && request.method === 'POST') {
         return loginRoute(request, response)
@@ -20,7 +24,7 @@ async function handle(request, response) {
     response.end("Hello World!");
 }
 
-const app = createServer(handle)
-    .listen(1090, () => console.log("listenign at 1000"))
+const app = createServer(handler)
+    .listen(1090, () => console.log("listenign at 1090"))
 
 export { app }
